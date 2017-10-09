@@ -1,15 +1,15 @@
-
-import React from './react';
+import React from 'react';
+import ReactPropTypes from 'prop-types';
 
 import IntlMessageFormat from 'intl-messageformat';
 import IntlRelativeFormat from 'intl-relativeformat';
 import createFormatCache from 'intl-format-cache';
 
 var typesSpec = {
-    locales: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array]),
+    locales: ReactPropTypes.oneOfType([ReactPropTypes.string, ReactPropTypes.array]),
 
-    formats: React.PropTypes.object,
-    messages: React.PropTypes.object
+    formats: ReactPropTypes.object,
+    messages: ReactPropTypes.object
 };
 
 function assertIsDate(date, errMsg) {

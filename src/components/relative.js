@@ -1,27 +1,23 @@
-/* jshint esnext:true */
-
-// TODO: Use `import React from "react";` when external modules are supported.
-import React from '../react';
-
+import React from 'react';
+import { decorate } from 'react-mixin';
+import ReactPropTypes from 'prop-types';
 import IntlMixin from '../mixin';
 
-var FormattedRelative = React.createClass({
-    displayName: 'FormattedRelative',
-    mixins     : [IntlMixin],
+class FormattedRelative extends React.Component {
 
-    statics: {
-        formatOptions: [
-            'style', 'units'
-        ]
-    },
+    static displayName = 'FormattedRelative'
 
-    propTypes: {
-        format: React.PropTypes.string,
-        value : React.PropTypes.any.isRequired,
-        now   : React.PropTypes.any
-    },
+    static formatOptions: [
+        'style', 'units'
+    ]
 
-    render: function () {
+    static propTypes = {
+        format: ReactPropTypes.string,
+        value : ReactPropTypes.any.isRequired,
+        now   : ReactPropTypes.any
+    }
+
+    render() {
         var props    = this.props;
         var value    = props.value;
         var format   = props.format;
@@ -34,6 +30,6 @@ var FormattedRelative = React.createClass({
 
         return (<span>{formattedRelativeTime}</span>);
     }
-});
+}
 
-export default FormattedRelative;
+export default decorate(IntlMixin)(FormattedRelative);

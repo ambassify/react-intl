@@ -1,29 +1,25 @@
-/* jshint esnext:true */
-
-// TODO: Use `import React from "react";` when external modules are supported.
-import React from '../react';
-
+import React from 'react';
+import { decorate } from 'react-mixin';
+import ReactPropTypes from 'prop-types';
 import IntlMixin from '../mixin';
 
-var FormattedNumber = React.createClass({
-    displayName: 'FormattedNumber',
-    mixins     : [IntlMixin],
+class FormattedNumber extends React.Component {
 
-    statics: {
-        formatOptions: [
-            'localeMatcher', 'style', 'currency', 'currencyDisplay',
-            'useGrouping', 'minimumIntegerDigits', 'minimumFractionDigits',
-            'maximumFractionDigits', 'minimumSignificantDigits',
-            'maximumSignificantDigits'
-        ]
-    },
+    static displayName = 'FormattedNumber'
 
-    propTypes: {
-        format: React.PropTypes.string,
-        value : React.PropTypes.any.isRequired
-    },
+    static formatOptions = [
+        'localeMatcher', 'style', 'currency', 'currencyDisplay',
+        'useGrouping', 'minimumIntegerDigits', 'minimumFractionDigits',
+        'maximumFractionDigits', 'minimumSignificantDigits',
+        'maximumSignificantDigits'
+    ]
 
-    render: function () {
+    static propTypes = {
+        format: ReactPropTypes.string,
+        value : ReactPropTypes.any.isRequired
+    }
+
+    render() {
         var props    = this.props;
         var value    = props.value;
         var format   = props.format;
@@ -32,6 +28,6 @@ var FormattedNumber = React.createClass({
 
         return (<span>{this.formatNumber(value, options)}</span>);
     }
-});
+}
 
-export default FormattedNumber;
+export default decorate(IntlMixin)(FormattedNumber);

@@ -9,6 +9,9 @@
             }
         }]
     ],
+    "plugins": [
+        "transform-class-properties"
+    ],
     "comments": false,
     "ignore": "*.json"
 }

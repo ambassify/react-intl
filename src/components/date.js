@@ -1,28 +1,24 @@
-/* jshint esnext:true */
-
-// TODO: Use `import React from "react";` when external modules are supported.
-import React from '../react';
-
+import React from 'react';
+import { decorate } from 'react-mixin';
+import ReactPropTypes from 'prop-types';
 import IntlMixin from '../mixin';
 
-var FormattedDate = React.createClass({
-    displayName: 'FormattedDate',
-    mixins     : [IntlMixin],
+class FormattedDate extends React.Component {
 
-    statics: {
-        formatOptions: [
-            'localeMatcher', 'timeZone', 'hour12', 'formatMatcher', 'weekday',
-            'era', 'year', 'month', 'day', 'hour', 'minute', 'second',
-            'timeZoneName'
-        ]
-    },
+    static displayName = 'FormattedDate';
 
-    propTypes: {
-        format: React.PropTypes.string,
-        value : React.PropTypes.any.isRequired
-    },
+    static formatOptions = [
+        'localeMatcher', 'timeZone', 'hour12', 'formatMatcher', 'weekday',
+        'era', 'year', 'month', 'day', 'hour', 'minute', 'second',
+        'timeZoneName'
+    ];
 
-    render: function () {
+    static propTypes = {
+        format: ReactPropTypes.string,
+        value : ReactPropTypes.any.isRequired
+    }
+
+    render() {
         var props    = this.props;
         var value    = props.value;
         var format   = props.format;
@@ -31,6 +27,6 @@ var FormattedDate = React.createClass({
 
         return (<span>{this.formatData}</span>);
     }
-});
+}
 
-export default FormattedDate;
+export default decorate(IntlMixin)(FormattedDate);

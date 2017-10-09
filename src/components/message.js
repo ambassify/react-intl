@@ -1,24 +1,22 @@
-/* jshint esnext:true */
-
-// TODO: Use `import React from "react";` when external modules are supported.
-import React from '../react';
-
+import React from 'react';
+import { decorate } from 'react-mixin';
+import ReactPropTypes from 'prop-types';
 import IntlMixin from '../mixin';
 
-var FormattedMessage = React.createClass({
-    displayName: 'FormattedMessage',
-    mixins     : [IntlMixin],
+class FormattedMessage extends React.Component {
 
-    propTypes: {
-        tagName: React.PropTypes.string,
-        message: React.PropTypes.string.isRequired
-    },
+    static displayName = 'FormattedMessage'
 
-    getDefaultProps: function () {
-        return {tagName: 'span'};
-    },
+    static propTypes = {
+        tagName: ReactPropTypes.string,
+        message: ReactPropTypes.string.isRequired
+    }
 
-    render: function () {
+    static defaultProps = {
+        tagName: 'span'
+    }
+
+    render() {
         var props   = this.props;
         var tagName = props.tagName;
         var message = props.message;
@@ -77,6 +75,6 @@ var FormattedMessage = React.createClass({
         var elementArgs = [tagName, null].concat(children);
         return React.createElement.apply(null, elementArgs);
     }
-});
+}
 
-export default FormattedMessage;
+export default decorate(IntlMixin)(FormattedMessage);
