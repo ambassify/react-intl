@@ -29,7 +29,7 @@ var FormattedDate = React.createClass({
         var defaults = format && this.getNamedFormat('date', format);
         var options  = FormattedDate.filterFormatOptions(props, defaults);
 
-        return React.DOM.span(null, this.formatDate(value, options));
+        return (<span>{this.formatData}</span>);
     }
 });
 

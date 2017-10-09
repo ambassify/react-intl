@@ -50,11 +50,9 @@ var FormattedHTMLMessage = React.createClass({
         //
         // Note: There's a perf impact of using this component since there's no
         // way for React to do its virtual DOM diffing.
-        return React.DOM[tagName]({
-            dangerouslySetInnerHTML: {
-                __html: this.formatMessage(message, values)
-            }
-        });
+        return (<tagName dangerouslySetInnerHTML={{
+            __html: this.formatMessage(message, values)
+        }} />);
     }
 });
 

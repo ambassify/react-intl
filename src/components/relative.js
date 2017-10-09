@@ -32,7 +32,7 @@ var FormattedRelative = React.createClass({
             now: props.now
         });
 
-        return React.DOM.span(null, formattedRelativeTime);
+        return (<span>{formattedRelativeTime}</span>);
     }
 });
 

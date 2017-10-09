@@ -30,7 +30,7 @@ var FormattedNumber = React.createClass({
         var defaults = format && this.getNamedFormat('number', format);
         var options  = FormattedNumber.filterFormatOptions(props, defaults);
 
-        return React.DOM.span(null, this.formatNumber(value, options));
+        return (<span>{this.formatNumber(value, options)}</span>);
     }
 });
 

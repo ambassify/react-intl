@@ -29,7 +29,7 @@ var FormattedTime = React.createClass({
         var defaults = format && this.getNamedFormat('time', format);
         var options  = FormattedTime.filterFormatOptions(props, defaults);
 
-        return React.DOM.span(null, this.formatTime(value, options));
+        return (<span>{this.formatTime(value, options)}</span>);
     }
 });
 

@@ -1,0 +1,14 @@
+{
+    "presets": [
+        "react",
+        ["env", {
+            "useBuiltIns": "entry",
+            "modules": false,
+            "targets": {
+                "browsers": ["last 2 versions", "not IE < 11", "not ie_mob < 11"]
+            }
+        }]
+    ],
+    "comments": false,
+    "ignore": "*.json"
+}

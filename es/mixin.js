@@ -1,33 +1,29 @@
-/* jshint esnext:true */
 
-// TODO: Use `import React from "react";` when external modules are supported.
-"use strict";
-var src$react$$ = require("./react"), intl$messageformat$$ = require("intl-messageformat"), intl$relativeformat$$ = require("intl-relativeformat"), intl$format$cache$$ = require("intl-format-cache");
+import React from './react';
 
-// -----------------------------------------------------------------------------
+import IntlMessageFormat from 'intl-messageformat';
+import IntlRelativeFormat from 'intl-relativeformat';
+import createFormatCache from 'intl-format-cache';
 
 var typesSpec = {
-    locales: src$react$$["default"].PropTypes.oneOfType([
-        src$react$$["default"].PropTypes.string,
-        src$react$$["default"].PropTypes.array
-    ]),
+    locales: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array]),
 
-    formats : src$react$$["default"].PropTypes.object,
-    messages: src$react$$["default"].PropTypes.object
+    formats: React.PropTypes.object,
+    messages: React.PropTypes.object
 };
 
 function assertIsDate(date, errMsg) {
-    // Determine if the `date` is valid by checking if it is finite, which is
-    // the same way that `Intl.DateTimeFormat#format()` checks.
     if (!isFinite(date)) {
         throw new TypeError(errMsg);
     }
 }
 
-exports["default"] = {
+export default {
     statics: {
-        filterFormatOptions: function (obj, defaults) {
-            if (!defaults) { defaults = {}; }
+        filterFormatOptions: function filterFormatOptions(obj, defaults) {
+            if (!defaults) {
+                defaults = {};
+            }
 
             return (this.formatOptions || []).reduce(function (opts, name) {
                 if (obj.hasOwnProperty(name)) {
@@ -41,55 +37,52 @@ exports["default"] = {
         }
     },
 
-    propTypes        : typesSpec,
-    contextTypes     : typesSpec,
+    propTypes: typesSpec,
+    contextTypes: typesSpec,
     childContextTypes: typesSpec,
 
-    getNumberFormat  : intl$format$cache$$["default"](Intl.NumberFormat),
-    getDateTimeFormat: intl$format$cache$$["default"](Intl.DateTimeFormat),
-    getMessageFormat : intl$format$cache$$["default"](intl$messageformat$$["default"]),
-    getRelativeFormat: intl$format$cache$$["default"](intl$relativeformat$$["default"]),
+    getNumberFormat: createFormatCache(Intl.NumberFormat),
+    getDateTimeFormat: createFormatCache(Intl.DateTimeFormat),
+    getMessageFormat: createFormatCache(IntlMessageFormat),
+    getRelativeFormat: createFormatCache(IntlRelativeFormat),
 
-    getChildContext: function () {
+    getChildContext: function getChildContext() {
         var context = this.context;
-        var props   = this.props;
+        var props = this.props;
 
         return {
-            locales:  props.locales  || context.locales,
-            formats:  props.formats  || context.formats,
+            locales: props.locales || context.locales,
+            formats: props.formats || context.formats,
             messages: props.messages || context.messages
         };
     },
 
-    formatDate: function (date, options) {
+    formatDate: function formatDate(date, options) {
         date = new Date(date);
         assertIsDate(date, 'A date or timestamp must be provided to formatDate()');
         return this._format('date', date, options);
     },
 
-    formatTime: function (date, options) {
+    formatTime: function formatTime(date, options) {
         date = new Date(date);
         assertIsDate(date, 'A date or timestamp must be provided to formatTime()');
         return this._format('time', date, options);
     },
 
-    formatRelative: function (date, options, formatOptions) {
+    formatRelative: function formatRelative(date, options, formatOptions) {
         date = new Date(date);
         assertIsDate(date, 'A date or timestamp must be provided to formatRelative()');
         return this._format('relative', date, options, formatOptions);
     },
 
-    formatNumber: function (num, options) {
+    formatNumber: function formatNumber(num, options) {
         return this._format('number', num, options);
     },
 
-    formatMessage: function (message, values) {
+    formatMessage: function formatMessage(message, values) {
         var locales = this.props.locales || this.context.locales;
         var formats = this.props.formats || this.context.formats;
 
-        // When `message` is a function, assume it's an IntlMessageFormat
-        // instance's `format()` method passed by reference, and call it. This
-        // is possible because its `this` will be pre-bound to the instance.
         if (typeof message === 'function') {
             return message(values);
         }
@@ -101,8 +94,8 @@ exports["default"] = {
         return message.format(values);
     },
 
-    getIntlMessage: function (path) {
-        var messages  = this.props.messages || this.context.messages;
+    getIntlMessage: function getIntlMessage(path) {
+        var messages = this.props.messages || this.context.messages;
         var pathParts = path.split('.');
 
         var message;
@@ -120,31 +113,29 @@ exports["default"] = {
         return message;
     },
 
-    getNamedFormat: function (type, name) {
+    getNamedFormat: function getNamedFormat(type, name) {
         var formats = this.props.formats || this.context.formats;
-        var format  = null;
+        var format = null;
 
         try {
             format = formats[type][name];
         } finally {
             if (!format) {
-                throw new ReferenceError(
-                    'No ' + type + ' format named: ' + name
-                );
+                throw new ReferenceError('No ' + type + ' format named: ' + name);
             }
         }
 
         return format;
     },
 
-    _format: function (type, value, options, formatOptions) {
+    _format: function _format(type, value, options, formatOptions) {
         var locales = this.props.locales || this.context.locales;
 
         if (options && typeof options === 'string') {
             options = this.getNamedFormat(type, options);
         }
 
-        switch(type) {
+        switch (type) {
             case 'date':
             case 'time':
                 return this.getDateTimeFormat(locales, options).format(value);
@@ -157,5 +148,3 @@ exports["default"] = {
         }
     }
 };
-
-//# sourceMappingURL=mixin.js.map

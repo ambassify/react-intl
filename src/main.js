@@ -11,6 +11,17 @@ import {
     __addLocaleData
 } from './react-intl';
 
+export {
+    IntlMixin,
+    FormattedDate,
+    FormattedTime,
+    FormattedRelative,
+    FormattedNumber,
+    FormattedMessage,
+    FormattedHTMLMessage,
+    __addLocaleData
+} from './react-intl';
+
 export default {
     IntlMixin           : IntlMixin,
     FormattedDate       : FormattedDate,
