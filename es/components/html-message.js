@@ -7,6 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { decorate } from 'react-mixin';
 import ReactPropTypes from 'prop-types';
 import escape from '../escape';
@@ -34,7 +35,7 @@ var FormattedHTMLMessage = function (_React$Component) {
                 if (typeof value === 'string') {
                     value = escape(value);
                 } else if (React.isValidElement(value)) {
-                    value = React.renderToStaticMarkup(value);
+                    value = ReactDOMServer.renderToStaticMarkup(value);
                 }
 
                 values[name] = value;

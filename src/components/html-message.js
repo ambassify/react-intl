@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { decorate } from 'react-mixin';
 import ReactPropTypes from 'prop-types';
 import escape from '../escape';
@@ -33,7 +34,7 @@ class FormattedHTMLMessage extends React.Component {
             if (typeof value === 'string') {
                 value = escape(value);
             } else if (React.isValidElement(value)) {
-                value = React.renderToStaticMarkup(value);
+                value = ReactDOMServer.renderToStaticMarkup(value);
             }
 
             values[name] = value;

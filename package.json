@@ -43,6 +43,7 @@
     "mocha": "^2.0.1"
   },
   "scripts": {
+    "build": "npm -s run build:esnext",
     "build:esnext": "babel -d es src",
     "prepublish": "npm -s run build:esnext ",
     "travis": "./tests/smoke/saucelabs.sh"
