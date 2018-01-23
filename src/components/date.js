@@ -25,7 +25,7 @@ class FormattedDate extends React.Component {
         var defaults = format && this.getNamedFormat('date', format);
         var options  = FormattedDate.filterFormatOptions(props, defaults);
 
-        return (<span>{this.formatData(value, options)}</span>);
+        return (<span>{this.formatDate(value, options)}</span>);
     }
 }
 
