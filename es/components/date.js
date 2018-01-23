@@ -32,7 +32,7 @@ var FormattedDate = function (_React$Component) {
             return React.createElement(
                 'span',
                 null,
-                this.formatData
+                this.formatData(value, options)
             );
         }
     }]);
