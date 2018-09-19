@@ -1,6 +1,6 @@
 {
   "name": "@ambassify/react-intl",
-  "version": "1.2.3",
+  "version": "1.2.3-react.15",
   "description": "React Components for internationalization.",
   "keywords": [
     "intl",
